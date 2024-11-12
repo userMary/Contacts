@@ -1,0 +1,73 @@
+﻿@model List<Contacts.Models.Contact>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Контакты</title>
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <h1>Список контактов</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Мобильный телефон</th>
+                <th>Альтернативный телефон</th>
+                <th>Email</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var contact in Model)
+            {
+                <tr>
+                    <td>@contact.Name</td>
+                    <td>@contact.MobilePhone</td>
+                    <td>@contact.AlternateMobilePhone</td>
+                    <td>@contact.Email</td>
+                    <td>@contact.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <button onclick="saveContacts('txt')">Сохранить в TXT</button>
+        @* <button onclick="saveContacts('docx')">Сохранить в DOCX</button> *@
+        <button onclick="saveContacts('pdf')">Сохранить в PDF</button>
+        <button onclick="saveContacts('xlsx')">Сохранить в XLSX</button>
+        <br />
+        @* <button onclick="loadFromTxt('txt')">Загрузить из TXT</button>
+        <button onclick="loadFromXlsx('xlsx')">Загрузить из XLSX</button> *@
+
+        <form id="uploadTxtForm" enctype="multipart/form-data" method="post" action="@Url.Action("LoadFromTxt", "Contacts")">
+            <input type="file" name="file" accept=".txt">
+            <button type="submit">Загрузить из TXT</button>
+        </form>
+
+        <form id="uploadXlsxForm" enctype="multipart/form-data" method="post" action="@Url.Action("LoadFromXlsx", "Contacts")">
+            <input type="file" name="file" accept=".xlsx">
+            <button type="submit">Загрузить из XLSX</button>
+        </form>
+    </div>
+
+    @* <div class="buttons">
+        <button onclick="saveAsTxt()">Сохранить в TXT</button>
+
+        <button onclick="saveAsDocx()">Сохранить в DOCX</button>
+        <button onclick="loadFromDocx()">Загрузить из DOCX</button>
+
+        <button onclick="saveAsPdf()">Сохранить в PDF</button>
+        <button onclick="loadFromPdf()">Загрузить из PDF</button>
+
+        <button onclick="saveAsXlsx()">Сохранить в XLSX</button>
+        <br />
+        <button onclick="loadFromTxt()">Загрузить из TXT</button>
+        <button onclick="loadFromXlsx()">Загрузить из XLSX</button>
+    </div> *@
+
+    <script src="~/js/script.js"></script>
+</body>
+</html>
